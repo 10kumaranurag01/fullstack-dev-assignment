@@ -1,12 +1,4 @@
 import { google, sheets_v4 } from "googleapis";
-import { Buffer } from "buffer";
-
-/* const base64Key: string | undefined = process.env.GOOGLE_PRIVATE_KEY;
-if (!base64Key) {
-  throw new Error("GOOGLE_PRIVATE_KEY environment variable is not defined");
-}
-
-const privateKey: string = Buffer.from(base64Key, "base64").toString("utf-8"); */
 
 if (!process.env.GOOGLE_PRIVATE_KEY) {
   throw new Error("GOOGLE_PRIVATE_KEY environment variable is not defined");
@@ -38,7 +30,7 @@ export async function appendToSheet({
   prompt,
   result,
 }: AppendToSheetParams): Promise<void> {
-  const spreadsheetId = "19txWlEpGEMiBjW9oLyYJ87mHp67ZRCXdkPTEBTWXP-g";
+  const spreadsheetId = process.env.GOOGLE_SPREADSHEET_ID;
   const range = "Sheet1!A:C";
 
   const values = [[new Date().toISOString(), prompt, result]];
@@ -52,7 +44,7 @@ export async function appendToSheet({
       spreadsheetId,
       range,
       valueInputOption: "USER_ENTERED",
-      requestBody, // Use requestBody instead of resource
+      requestBody,
     });
   } catch (error) {
     console.error("Error appending data to Google Sheets:", error);
@@ -62,8 +54,8 @@ export async function appendToSheet({
 
 // Function to read data from the spreadsheet
 export async function readFromSheet(): Promise<any[]> {
-  const spreadsheetId = "19txWlEpGEMiBjW9oLyYJ87mHp67ZRCXdkPTEBTWXP-g";
-  const range = "Sheet1!A:C"; // Adjust range as needed
+  const spreadsheetId = process.env.GOOGLE_SPREADSHEET_ID;
+  const range = "Sheet1!A:C";
 
   try {
     const response = await sheets.spreadsheets.values.get({
