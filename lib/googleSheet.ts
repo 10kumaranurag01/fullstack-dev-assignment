@@ -1,9 +1,17 @@
 import { google, sheets_v4 } from "googleapis";
+import { Buffer } from "buffer";
+
+const base64Key: string | undefined = process.env.GOOGLE_PRIVATE_KEY;
+if (!base64Key) {
+  throw new Error("GOOGLE_PRIVATE_KEY environment variable is not defined");
+}
+
+const privateKey: string = Buffer.from(base64Key, "base64").toString("utf-8");
 
 const auth = new google.auth.GoogleAuth({
   credentials: {
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
-    private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    private_key: privateKey?.replace(/\\n/g, "\n"),
   },
   scopes: [
     "https://www.googleapis.com/auth/drive",
