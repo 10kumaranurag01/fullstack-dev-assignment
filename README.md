@@ -1,53 +1,90 @@
-# TMD: FullStack Intern Assignment
+# Fullstack Developer Assignment
 
-# INSTRUCTIONS:
+This project demonstrates integrating Next.js with Google Sheets using the Google Generative AI API. The application allows users to generate content using the AI API and store the generated content in a Google Sheet.
 
-**[IMPORTANT]:** _**PLEASE USE TYPESCRIPT AND NEXT.JS. For all operations related to Google Sheets, including authentication, please use only Google's official REST APIs: [Google Sheets API](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values) and [Google OAuth 2.0 API](https://developers.google.com/identity/protocols/oauth2). After you are done, please write a brief overview of the folder structure (code walkthrough) and mention the bonus task you have picked (if any) in `README.md`. Additionally, ensure to deploy the assignment and include deployment instructions in the `README.md`.**_
+## Installation
 
-## Overview
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/fullstack-developer-assignment.git
+    cd fullstack-developer-assignment
+    ```
 
-This assignment involves setting up a web application where users can input a prompt to generate social media posts text using OpenAI's API. These posts should then be saved to a Google Spreadsheet using Google Sheets API (without using Google SDKs). For a bonus, the application should be able to fetch and display the posts from the spreadsheet.
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
 
-## Your Tasks
+3. Create a `.env.local` file in the root of the project and add the following environment variables:
+    ```env
+    GEMINI_API_KEY=your_gemini_api_key
+    GOOGLE_CLIENT_EMAIL=your_google_client_email
+    GOOGLE_PRIVATE_KEY=your_google_private_key
+    ```
 
-1. **Generate Social Media Posts**:
+## Running the Application
 
-   - Use OpenAI's API to generate social media posts texts based on the user's prompt.
-   - Ensure that you use your own OpenAI API key.
+1. Start the development server:
+    ```bash
+    npm run dev
+    ```
 
-2. **Create and Use a Google Spreadsheet**:
+2. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-   - Create a new Google Spreadsheet in your Google account.
-   - Get the Required keys from your own Google Cloud Console.
+## Project Structure
 
-3. **Save Posts to Google Spreadsheet**:
+fullstack-developer-assignment/
+├── app/
+│ ├── api/
+│ │ ├── generate/
+│ │ │ └── route.ts
+│ │ └── get-sheet-data/
+│ │ └── route.ts
+│ ├── favicon.ico
+│ ├── globals.css
+│ ├── layout.tsx
+│ └── page.tsx
+├── lib/
+│ └── googleSheet.ts
+├── .env.local
+├── .gitignore
+├── next.config.js
+├── package.json
+├── README.md
+├── tailwind.config.ts
+└── tsconfig.json
 
-   - Save the generated social media posts to the newly created Google Spreadsheet using the Google Sheets API.
-   - The spreadsheet should contain the following columns:
-     - `Timestamp`: The date and time when the post was created.
-     - `Prompt`: The original user input.
-     - `Post`: The generated social media post.
 
-4. **Bonus: Retrieve and Display Posts**:
-   - Fetch the social media posts from the Google Spreadsheet.
-   - Display the fetched posts text on the UI below the input field.
+## Code Walkthrough
 
-## Estimated Time
+### API Routes
 
-Please spend no more than 1 day on this assignment and submit whatever you can complete within that time frame.
+#### `app/api/generate/route.ts`
 
-## Bonus Tasks
+Handles generating content using the Google Generative AI API and appending the result to a Google Sheet.
 
-1. Retrieve and display the generated posts from the Google Spreadsheet on the UI.
-2. Add error handling and user feedback for API requests.
+#### `app/api/get-sheet-data/route.ts`
 
-## Submission
+Fetches data from the Google Sheet.
 
-1. Ensure all your changes are committed.
-2. Push your changes to a new repository on your personal GitHub account with public access.
-3. Provide a link to your repository, along with your email and phone number, in the provided Google Form.
-4. Include the URL of your Google Spreadsheet in your `README.md` with view and edit access to everyone.
-5. Write a brief overview of the folder structure (code walkthrough) in your `README.md`.
-6. Deploy your application and include the deployed application's URL in your `README.md`.
+### Frontend
 
-#### Note: Use your API keys for development purposes only. Include the variables in the `.env.example` file for reference.
+#### `app/page.tsx`
+
+The main page where users can input a prompt, generate content, and view the Google Sheet data.
+
+### Google Sheets Integration
+
+#### `lib/googleSheet.ts`
+
+Contains functions to interact with Google Sheets:
+- `appendToSheet` - Appends generated content to the sheet.
+- `readFromSheet` - Reads data from the sheet.
+
+## URL of Google Spreadsheet
+
+[https://docs.google.com/spreadsheets/d/19txWlEpGEMiBjW9oLyYJ87mHp67ZRCXdkPTEBTWXP-g/edit?gid=0#gid=0](https://docs.google.com/spreadsheets/d/19txWlEpGEMiBjW9oLyYJ87mHp67ZRCXdkPTEBTWXP-g/edit?gid=0#gid=0)
+
+## Deployment
+
+Deployed 
