@@ -87,4 +87,4 @@ Contains functions to interact with Google Sheets:
 
 ## Deployment
 
-Had some issues with GOOGLE_PRIVATE_KEY env variable while deploying it to vercel, due to project deadlines am submitting without deploying, am trying to solve the issue meanwhile.
+Had some issues with GOOGLE_PRIVATE_KEY env variable while deploying it to vercel, due to project deadlines am submitting without deploying, am trying to solve the issue meanwhile. (THE PROJECT WORKS FLAWLESSLY LOCALLY)
